@@ -1,0 +1,33 @@
+@mixin sizesGen {
+  @for $i from 0 through 10 {
+    @each $name, $prop in $groups {
+      .#{$name}-#{$i} {
+        @if $i > 0 {
+          #{$prop}: #{$i / 2}rem;
+        }
+        @else {
+          #{$prop}: 0;
+        }
+      }
+      @each $dir, $option in $directions {
+        .#{$name}#{$dir}-#{$i} {
+          @if $i > 0 {
+            #{$prop}-#{$option}: #{$i / 2}rem;
+          }
+          @else {
+            #{$prop}-#{$option}: 0;
+          }
+        }
+        .-#{$name}#{$dir}-#{$i} {
+          @if $i > 0 {
+            #{$prop}-#{$option}: -#{$i / 2}rem;
+          }
+          @else {
+            #{$prop}-#{$option}: 0;
+          }
+        }
+      }
+    }
+  }
+}
+@include sizesGen;

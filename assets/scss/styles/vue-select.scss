@@ -1,0 +1,39 @@
+.vs__open-indicator {
+  fill: white;
+}
+.vs__selected {
+  color: white;
+}
+.vs__clear {
+  fill: $danger
+}
+.v-select {
+  border-bottom: 1px solid $grey-5 !important;
+}
+.vs__dropdown-toggle {
+  padding: 0 !important;
+}
+.vs__dropdown-option {
+  color: white;
+}
+
+.vs__dropdown-toggle {
+  transition: $transition;
+  &:hover {
+    background: $grey-2;
+  }
+}
+.vs__search {
+  &:hover {
+    background: unset;
+  }
+}
+.vs__open-indicator {
+  cursor: pointer;
+}
+$vs-dropdown-bg: $grey-2;
+$vs-state-active-bg: $grey-3;
+$vs-state-active-color: $primary !important;
+$vs-border-width: 0;
+$vs-border-style: solid;
+$vs-border-radius: 0;

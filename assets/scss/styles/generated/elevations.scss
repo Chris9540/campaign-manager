@@ -1,0 +1,23 @@
+@mixin elevations {
+  @for $i from 0 through 5 {
+    .elevation-#{$i} {
+      transition: box-shadow ease-out 0.25s;
+      @include elevation($i);
+      @if $i < 5 {
+        &[data-hover-elevation="up"] {
+          &:hover {
+            @include elevation($i + 1);
+          }
+        }
+      }
+      @if $i > 0 {
+        &[data-hover-elevation="down"] {
+          &:hover {
+            @include elevation($i - 1);
+          }
+        }
+      }
+    }
+  }
+}
+@include elevations;

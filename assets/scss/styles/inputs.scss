@@ -1,0 +1,29 @@
+$half-size: $size-1 / 2;
+$quarter-size: $size-1 / 4;
+
+input, select {
+  border-radius: 0;
+  outline: none;
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid $grey-5;
+  border-left: none;
+  font-size: 1.1rem;
+  padding: $half-size $half-size $quarter-size $half-size;
+  line-height: 1rem;
+  font-family: monospace !important;
+  min-width: 50px;
+  background: $card-body-bg;
+  color: white;
+  transition: $transition;
+  option {
+    font-family: monospace !important;
+  }
+  &:hover,
+  &:focus {
+    background: darken($card-body-bg, 10%);
+  }
+  &:focus {
+    border-bottom: 1px solid $primary;
+  }
+}

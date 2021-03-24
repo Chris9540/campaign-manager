@@ -1,0 +1,24 @@
+.sweet-modal.theme-dark {
+  background: $grey-2 !important;
+  color: #fff !important;
+}
+
+.sweet-modal-overlay.theme-dark {
+  background:  rgba(0,0,0,0.6);
+}
+
+.sweet-action-close {
+  transition: $transition;
+  &:hover {
+    background: $primary !important;
+    background-color: $primary !important;
+  }
+}
+
+.sweet-buttons {
+  border-top-color: $grey-6 !important;
+}
+
+.sweet-content {
+  padding: $size-2 $size-1 !important;
+}

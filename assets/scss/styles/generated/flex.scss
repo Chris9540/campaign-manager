@@ -1,0 +1,21 @@
+$vertical: ('t': flex-start, 'c' : center, 'b': flex-end);
+$horizontal: ('l': flex-start, 'c': center, 'r': flex-end);
+
+@each $v, $align in $vertical {
+  @each $h, $justify in $horizontal {
+    @if $v == 'c' and $h == 'c' {
+      .f-c {
+        display: flex;
+        justify-content: $justify;
+        align-items: $align;
+      }
+    }
+    @else {
+      .f-#{$v}#{$h} {
+        display: flex;
+        justify-content: $justify;
+        align-items: $align;
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+@import "contrast";
+
+$variation: 5%;
+
+$grey-0: black;
+$grey-1: lighten(black, 10%);
+$grey-2: lighten(black, 20%);
+$grey-3: lighten(black, 30%);
+$grey-4: lighten(black, 40%);
+$grey-5: lighten(black, 50%);
+$grey-6: lighten(black, 60%);
+$grey-7: lighten(black, 70%);
+$grey-8: lighten(black, 80%);
+$grey-9: lighten(black, 90%);
+$grey-10: white;
+
+$primary: coral;
+$primary-dark: darken($primary, $variation);
+$primary-light: lighten($primary, $variation);
+$primary-text: choose-contrast-color($primary);
+$primary-map: (background: $primary, background-dark: $primary-dark, background-light: $primary-light, color: $primary-text);
+
+$secondary: #00bcd4;
+$secondary-dark: darken($secondary, $variation);
+$secondary-light: lighten($secondary, $variation);
+$secondary-text: choose-contrast-color($secondary);
+$secondary-map: (background: $secondary, background-dark: $secondary-dark, background-light: $secondary-light, color: $secondary-text);
+
+$danger: #f44336;
+$danger-dark: darken($danger, $variation);
+$danger-light: lighten($danger, $variation);
+$danger-text: choose-contrast-color($danger);
+$danger-map: (background: $danger, background-dark: $danger-dark, background-light: $danger-light, color: $danger-text);
+
+$success: #4caf50;
+$success-dark: darken($success, $variation);
+$success-light: lighten($success, $variation);
+$success-text: choose-contrast-color($success);
+$success-map: (background: $success, background-dark: $success-dark, background-light: $success-light, color: $success-text);
+
+$default: $grey-5;
+$default-dark: darken($default, $variation);
+$default-light: lighten($default, $variation);
+$default-text: choose-contrast-color($default);
+$default-map: (background: $default, background-dark: $default-dark, background-light: $default-light, color: $default-text);
+
+$blue: #3f51b5;
+$blue-dark: darken($blue, $variation);
+$blue-light: lighten($blue, $variation);
+$blue-text: choose-contrast-color($blue);
+$blue-map: (background: $blue, background-dark: $blue-dark, background-light: $blue-light, color: $blue-text);
+
+$purple: #9c27b0;
+$purple-dark: darken($purple, $variation);
+$purple-light: lighten($purple, $variation);
+$purple-text: choose-contrast-color($purple);
+$purple-map: (background: $purple, background-dark: $purple-dark, background-light: $purple-light, color: $purple-text);
+
+$yellow: #ffeb3b;
+$yellow-dark: darken($yellow, $variation);
+$yellow-light: lighten($yellow, $variation);
+$yellow-text: choose-contrast-color($yellow);
+$yellow-map: (background: $yellow, background-dark: $yellow-dark, background-light: $yellow-light, color: $yellow-text);
+
+
+
+$header-bg: $grey-1;
+$card-head-bg: $grey-2;
+$card-body-bg: $grey-3;
+$screen-bg: $grey-4;
+
+
+$color-map: (
+  'primary' : $primary-map,
+  'secondary' : $secondary-map,
+  'danger' : $danger-map,
+  'success': $success-map,
+  'default': $default-map,
+  'blue': $blue-map,
+  'purple': $purple-map,
+  'yellow': $yellow-map
+);

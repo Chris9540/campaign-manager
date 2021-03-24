@@ -1,0 +1,6 @@
+
+@each $color, $map in $color-map {
+  .text-#{$color} {
+    color: map-get($map, 'background');
+  }
+}
