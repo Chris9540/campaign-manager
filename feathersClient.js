@@ -1,4 +1,5 @@
 import feathers from '@feathersjs/feathers'
+import { iff, discard } from 'feathers-hooks-common';
 import socketio from '@feathersjs/socketio-client'
 import auth from '@feathersjs/authentication-client'
 import io from 'socket.io-client'
@@ -16,6 +17,16 @@ export default (origin, storage) => {
   const feathersClient = feathers()
     .configure(socketio(socket))
     .configure(auth({ storage }))
+    .hooks({
+      before: {
+        all: [
+          iff(
+            context => ['create', 'update', 'patch'].includes(context.method),
+            discard('__id', '__isTemp')
+          )
+        ]
+      }
+    });
 
   return feathersClient
 }

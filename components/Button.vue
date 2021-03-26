@@ -16,8 +16,10 @@
 
 export default {
   props: {
-    // eslint-disable-next-line vue/require-default-prop
-    payload: null,
+    payload: {
+      required : false,
+      default: null
+    },
     color: {
       type: String,
       required: false,
@@ -65,6 +67,8 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
   .async {
   height:16px;
   width:16px;
@@ -91,6 +95,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
   cursor: pointer;
   &:focus {
     outline: none;

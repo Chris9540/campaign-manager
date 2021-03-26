@@ -1,6 +1,5 @@
 <template>
   <section>
-    <navigation />
     <h1>This place is secret</h1>
     <li v-for="user in findUsersInStore" :key="user.email">
       {{ user.email }}

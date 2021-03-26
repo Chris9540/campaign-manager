@@ -38,7 +38,6 @@ module.exports = function (app) {
   // add to app
   app.set('sequelizeClient', sequelize)
   app.set('fetch', fetch)
-
   // associate models
   app.setup = function (...args) {
     const result = oldSetup.apply(this, args)

@@ -24,8 +24,19 @@ export default {
   mounted () {
     this.$slots.default.forEach((child) => {
       const { tag, elm } = child
-      if (tag === 'input' || tag === 'select') {
-        elm.classList.add(tag)
+      switch (tag) {
+        case 'input':
+          elm.classList.add(tag)
+          break;
+        case 'select':
+          elm.classList.add(tag)
+          break;
+        case 'textarea':
+          elm.classList.add(tag)
+          elm.addEventListener('input', ()=>{
+            elm.style.height = ""
+            elm.style.height = elm.scrollHeight + 3 + 'px'
+          })
       }
     })
   }
@@ -39,14 +50,17 @@ export default {
   justify-content: space-between;
   align-items: flex-end;
   padding-bottom: 6px;
-  height: 42px;
+  min-height: 42px;
   .input-label {
     min-width: 50px;
     line-height: 1;
   }
-  .input, .select {
+  .input, .select, .textarea {
     flex: 1;
     max-width: 400px;
+  }
+  .textarea {
+    min-height: 40px;
   }
 }
 </style>

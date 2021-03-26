@@ -15,32 +15,9 @@ ul {
   list-style: none;
   padding: 0;
 }
-
-button.ghost {
-  border-color: coral;
-  background: none;
-  color: coral;
+a {
+  text-decoration: none;
 }
-
-button.is-loading::before {
-  animation: spin 1s infinite linear;
-  border: .125em solid white;
-  border-radius: 50%;
-  border-top-color: transparent;
-  content: '';
-  display: inline-block;
-  height: 1em;
-  margin-right: 1em;
-  width: 1em;
-}
-
-button.ghost.is-loading::before {
-  border-color: coral;
-  border-top-color: transparent;
-}
-
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(359deg); }
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
 }

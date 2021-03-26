@@ -1,28 +1,29 @@
 # Nuxt with feathers
 
-### Problem:
+## Problem
+
 It seems that even though you are setting up the feathers client with the cookie storage module, the JWT is still not available to the feathers client as a cookie in the server environment. Hence, the error 'Could not find stored JWT and no authentication strategy was given'.
 
-### Solution:
+### Solution
 
 Use Nuxt Plugin to Authenticate through the store before Nuxt is rendered in the client
 
-## About
+### About
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 
-## Getting Started
+### Getting Started
 
 1. Make sure you have [NodeJS](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
 2. Install your dependencies
 
-    ```
+    ```bash
     cd path/to/feathers-nuxt-2; npm install
     ```
 
 3. Start your app
 
-    ```
+    ```bash
     npm run dev
     ```
 
@@ -31,13 +32,15 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
     Send post request to http://localhost:3030/users with 
 
     Header
-    ```
+
+    ```js
     Content-Type: application/json
     Accept: application/json
     ```
 
     Body
-    ```
+
+    ```js
     {
         "email":"buddy@so.com",
         "password": "123456"
@@ -45,7 +48,7 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
     ```
 
     Your final request should look like bellow
-    ```
+
     POST /users HTTP/1.1
     Host: localhost:3030
     Content-Type: application/json
@@ -53,30 +56,23 @@ This project uses [Feathers](http://feathersjs.com). An open source web framewor
     cache-control: no-cache
     Postman-Token: f0e3ab3e-b46c-42dd-9c49-91de88b8a841
 
+    ```js
     {
     "email":"buddy@so.com",
     "password": "123456"
     }
     ```
 
-
-4. Run the app
-    * Route to http://localhost:3030/
+5. Run the app
+    * Route to http://localhost:3080/
     * Login using the above credentials
     * Route to the "Secret Section"
     * Refresh browser using F5
 
 ## Help
 
-
 ## Changelog
 
-__0.1.0__
+### 0.1.0
 
-- Initial release
-
-## License
-
-Copyright (c) 2018
-
-Licensed under the [MIT license](LICENSE).
+* Initial release

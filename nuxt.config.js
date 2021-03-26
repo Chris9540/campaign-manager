@@ -17,7 +17,8 @@ module.exports = {
   css: ['~/assets/scss/global.scss'],
   modules: [
     '@nuxtjs/style-resources',
-    'nuxt-fontawesome'
+    'nuxt-fontawesome',
+    '@nuxtjs/axios'
   ],
   fontawesome: {
     component: 'fa',

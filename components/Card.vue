@@ -113,7 +113,7 @@ $card-head-height: 40px;
     background-color: $card-body-bg;
     min-height: $size-10;
     color: white;
-    padding: $size-2;
+    padding: 0 $size-2;
     transition: all ease-out 0.25s;
     height: fit-content;
     &[data-expand="hide"] {

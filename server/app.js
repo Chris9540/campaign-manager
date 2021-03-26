@@ -21,7 +21,6 @@ const app = express(feathers())
 
 // Load app configuration
 app.configure(configuration())
-app.configure(sequelize)
 // Enable security, CORS, compression, favicon and body parsing
 app.use(helmet())
 app.use(cors())
@@ -37,7 +36,7 @@ app.use(cookieParser())
 // Set up Plugins and providers
 app.configure(express.rest())
 app.configure(socketio())
-
+app.configure(sequelize)
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware)
 app.configure(authentication)

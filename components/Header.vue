@@ -43,7 +43,7 @@
     </div>
     <div class="header-right">
       <template v-if="!isAuthenticated">
-        <Button color="success" class="mr-1" @click.prevent="$router.push('/authenticate')">
+        <Button color="success" class="mr-1" @click.prevent="$router.push('/login')">
           Login
         </Button>
         <Button color="secondary" class="mr-1" @click.prevent="$router.push('/signup')">
@@ -51,15 +51,51 @@
         </Button>
       </template>
       <template v-else>
-        <Button color="primary" class="mr-1" @click.prevent="$router.push('/session/profile')">
-          Profile
+        <Button color="primary" icon class="mr-2" @click.prevent="showProfile">
+          <fa icon="user" />
         </Button>
-        <Button color="danger" class="mr-1" @click.prevent="exit">
-          Logout
-        </Button>
+        <div class="profile-dropdown elevation-1" :data-show="profile">
+          <ul v-if="user">
+            <template v-if="user.link && user.name && user.token">
+              <li class="f-c p-1">
+                <img :src="user.token" height="128px" width="128px">
+              </li>
+              <li class="f-c p-1">
+                <h3 class="text-secondary m-0">
+                  {{ user.name }}
+                </h3>
+                <i style="font-size: 80%;" class="ml-1">[{{ user.role }}]</i>
+              </li>
+              <li class="f-c p-1">
+                <a :href="user.link" target="_blank" @click="close">
+                  <Button color="secondary">
+                    Character Sheet
+                  </Button>
+                </a>
+              </li>
+            </template>
+            <template v-else>
+              <li class="f-c p-1">
+                <h3 class="text-secondary">
+                  Finish Profle
+                </h3>
+              </li>
+            </template>
+            <li class="f-c p-1">
+              <Button color="success" @click.prevent="goToProfile">
+                Profile
+              </Button>
+            </li>
+            <li class="f-c p-1">
+              <Button color="danger" @click.prevent="exit">
+                Logout
+              </Button>
+            </li>
+          </ul>
+        </div>
       </template>
     </div>
-    <div v-if="show" class="header-overlay" @click="toggle">
+    <div v-if="show || profile" class="header-overlay" @click="close">
     </div>
   </div>
 </template>
@@ -67,24 +103,38 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 
-
 export default {
-  name: 'Navigation',
+  name: 'Header',
 
   computed: {
-    ...mapState('auth', ['accessToken']),
+    ...mapState('auth', ['accessToken', 'payload']),
     isAuthenticated() {
       return this.accessToken;
     },
     name () {
       return this.$store.state.page.name
     },
+    menu() {
+      return {
+        left: [
+          {text: 'Campaigns', link: '/campaigns', icon: 'route'}
+        ],
+        right: [
+          {text: 'Maps', link: `/users/${this.payload.userId}`, icon: 'map'}
+        ]
+      }
+    }
   },
   methods: {
     ...mapActions('auth', ['logout']),
+    ...mapActions('users', ['get']),
     async exit() {
       const data = await this.logout()
-      location.reload()
+      this.$router.push('/')
+    },
+    close() {
+      this.show = false
+      this.profile = false
     },
     toggle () {
       const next = !this.show
@@ -92,24 +142,28 @@ export default {
         this.width.width = `${this.$refs.display.clientWidth}px`
       }
       this.show = next
+    },
+    async showProfile () {
+      if (this.user === null) {
+        this.user = await this.get(this.payload.userId)
+      }
+      this.$nextTick(()=>{
+        this.profile = !this.profile
+      })
+    },
+    goToProfile () {
+      this.close()
+      this.$router.push(`/users/${this.payload.userId}`)
     }
   },
-  mounted() {
-    console.log(this.$store)
-  },
+
   data () {
     return {
       show: false,
+      profile: false,
+      user: null,
       width: {
         width: ''
-      },
-      menu: {
-        left: [
-          {text: 'Home', link: '/', icon: 'robot'}
-        ],
-        right: [
-          {text: 'Profile', link: '/session/profile', icon: 'user'}
-        ]
       }
     }
   }
@@ -256,6 +310,21 @@ export default {
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+    .profile-dropdown {
+      position: fixed;
+      display: block;
+      overflow: hidden;
+      right: $size-2;
+      height: 0px;
+      width: 200px;
+      top: $header-height;
+      z-index: 900;
+      background-color: $grey-2;
+      transition: all ease-out 0.25s;
+      &[data-show="true"] {
+        height: 350px !important;
+      }
+    }
   }
   .header-overlay {
     width: 100vw;

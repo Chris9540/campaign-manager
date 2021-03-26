@@ -32,7 +32,11 @@ module.exports = function (app) {
     link: {
       type: DataTypes.STRING,
       allowNull: true
-    }
+    },
+    token: {
+      type: DataTypes.STRING,
+      allowNull:true
+    },
   }, {
     underscored: true,
     hooks: {
@@ -41,6 +45,12 @@ module.exports = function (app) {
       }
     }
   })
+  users.associate = function (models) {
+    console.log('models', models)
+    users.belongsToMany(models.campaigns, {
+      through: models.campaign_roles
+    })
+  }
 
   return users
 }
