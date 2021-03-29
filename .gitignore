@@ -5,6 +5,9 @@
 logs
 *.log
 
+# Uploads
+!assets/uploads/.gitkeep
+
 # Runtime data
 pids
 *.pid
@@ -105,4 +108,3 @@ $RECYCLE.BIN/
 
 # Others
 lib/
-data/

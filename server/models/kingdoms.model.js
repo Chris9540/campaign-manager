@@ -2,18 +2,19 @@
 
 const Sequelize = require('sequelize')
 const DataTypes = Sequelize.DataTypes
-
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient')
-  const campaign_roles = sequelizeClient.define('campaign_roles', {
-    role: {
-      type: DataTypes.STRING,
-      allowNull: false
+  const Kingdoms = sequelizeClient.define('kingdoms', {
+    id: {
+      type: DataTypes.BIGINT,
+      autoIncrement: true,
+      primaryKey: true
     },
-    character_sheet: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+    name: {
+      type: DataTypes.STRING
+    }
+
+
   }, {
     underscored: true,
     hooks: {
@@ -23,5 +24,9 @@ module.exports = function (app) {
     }
   })
 
-  return campaign_roles
+  Kingdoms.associate = function (models) {
+    
+  }
+
+  return Kingdoms
 }

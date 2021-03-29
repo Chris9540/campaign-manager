@@ -9,9 +9,6 @@ module.exports = function (app) {
   const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: './data/database.sqlite',
-    query: {
-      raw: true
-    },
     define: {
       freezeTableName: true,
       underscored: true,

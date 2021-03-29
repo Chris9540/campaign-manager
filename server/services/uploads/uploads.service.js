@@ -1,21 +1,15 @@
 // Initializes the `users` service on path `/users`
-const createService = require('feathers-sequelize')
 const createModel = require('../../models/uploads.model')
 const hooks = require('./uploads.hooks')
 const blobService = require("feathers-blob");
 const fs = require("fs-blob-store");
-const blobStorage = fs("./uploads");
+const blobStorage = fs("./assets/uploads");
 const multer = require('multer');
 const multipartMiddleware = multer();
 
 module.exports = function (app) {
   const Model = createModel(app)
-  const paginate = app.get('paginate')
 
-  const options = {
-    Model,
-    paginate
-  }
 
   
   // Initialize our service with any options it requires

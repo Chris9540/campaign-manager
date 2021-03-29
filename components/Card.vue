@@ -1,5 +1,5 @@
 <template>
-  <div class="card-root elevation-2" data-hover-elevation="up" :style="style">
+  <div class="card-root elevation-2 mb-2" data-hover-elevation="up" :style="style">
     <div class="card-head">
       <div v-if="hasIcon" class="card-icon">
         <slot name="icon" />
@@ -16,7 +16,7 @@
         </button>
       </div>
     </div>
-    <div class="card-body" :data-expand="(show)? 'show': 'hide'">
+    <div class="card-body" :data-expand="(show)? 'show': 'hide'" :style="(nopad)? {padding: 0}: {}">
       <slot name="body" />
     </div>
   </div>
@@ -39,6 +39,11 @@ export default {
       type: String,
       required: false,
       default: '100%'
+    },
+    nopad: {
+      type:Boolean,
+      required: false,
+      default: false
     }
   },
   data () {

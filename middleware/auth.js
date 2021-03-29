@@ -4,6 +4,6 @@ export default function (context) {
 
   console.log('Route: %s', route.path)
   if (!auth.publicPages.includes(route.name) && !auth.payload) {
-    return redirect('/authenticate')
+    return redirect('/login')
   }
 }

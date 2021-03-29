@@ -2,10 +2,9 @@
 
 const Sequelize = require('sequelize')
 const DataTypes = Sequelize.DataTypes
-
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient')
-  const campaigns = sequelizeClient.define('campaigns', {
+  const Worlds = sequelizeClient.define('worlds', {
     id: {
       type: DataTypes.BIGINT,
       autoIncrement: true,
@@ -15,10 +14,18 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true
+    primary: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      default: false
     },
+    description: {
+      type: DataTypes.STRING
+    },
+    map_link: {
+      type: DataTypes.STRING,
+      allowNul:true
+    }
   }, {
     underscored: true,
     hooks: {
@@ -28,16 +35,9 @@ module.exports = function (app) {
     }
   })
 
-  campaigns.associate = function (models) {
-    campaigns.belongsToMany(models.users, {
-      through: 'campaign-roles',
-      as: 'campaign_players'
-    })
-    campaigns.belongsTo(models.users, { 
-      foreignKey: 'owner',
-      as: 'campaign_owner'
-    })
+  Worlds.associate = function (models) {
+    
   }
 
-  return campaigns
+  return Worlds
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="input-control">
-    <label class="input-label pr-2 text-secondary">
+    <label class="input-label pr-2 text-secondary" :style="labelCSS">
       {{ label }}
       <span v-if="required" class="text-danger">*</span>
     </label>
@@ -19,6 +19,35 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    bindHeight: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    labelPos: {
+      type: String,
+      required: false,
+      default: 'bottom',
+    },
+  },
+  computed: {
+    labelCSS() {
+      let alignment = ''
+      switch(this.labelPos) {
+        case 'top':
+          alignment = 'flex-start';
+          break;
+        case 'middle':
+          alignment = 'center';
+          break;
+        default :
+          alignment = 'flex-end';
+          break;
+      }
+      return {
+        alignSelf: alignment,
+      }
     }
   },
   mounted () {
@@ -33,10 +62,13 @@ export default {
           break;
         case 'textarea':
           elm.classList.add(tag)
-          elm.addEventListener('input', ()=>{
-            elm.style.height = ""
-            elm.style.height = elm.scrollHeight + 3 + 'px'
-          })
+          if(this.bindHeight) {
+            elm.addEventListener('input', ()=>{
+              elm.style.height = ""
+              elm.style.height = elm.scrollHeight + 3 + 'px'
+            })
+          }
+
       }
     })
   }

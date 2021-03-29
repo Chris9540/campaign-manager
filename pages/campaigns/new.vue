@@ -8,23 +8,16 @@
         <InputControl label="Description">
           <textarea ref="textarea" name="description" v-model="data.description"></textarea>
         </InputControl>
-        <InputControl label="Dungeon Master">
-          <select v-model="data.dungeon_master">
-            <option v-for="user in users" :key="user.id" :value="user.id">
-              {{ user.name }}
-            </option>
-          </select>
-        </InputControl>
         <ul style="width:100%">
-          <li v-for="player, key in data.campaigne_roles" :key="key" class="p-3 player-wrap">
+          <li v-for="player, key in data.campaignRoles" :key="key" class="p-3 player-wrap">
             <ul>
-              <li class="f-cr">
+              <li class="f-cr" v-if="key > 0">
                 <Button color="danger" @click="removePlayer" :payload="key">
-                  Remove Player {{key+1}}
+                  Remove Player {{key}}
                 </Button>
               </li>
               <li>
-                <InputControl :label="'Player ' + (key+1)">
+                <InputControl :label="(key > 0) ? 'Player ' + key : 'Dungeon Master'">
                   <select v-model="player.userId" name="player">
                     <option v-for="user in users" :key="user.id" :value="user.id">
                       {{ user.name }}
@@ -32,9 +25,9 @@
                   </select>
                 </InputControl>
               </li>
-              <li>
+              <li v-if="key > 0">
                 <InputControl label="Character Sheet">
-                  <input type="url" v-model="player.charater_sheet" name="charater_sheet">
+                  <input type="url" v-model="player.charaterSheet" name="charater_sheet">
                 </InputControl>
               </li>
             </ul>
@@ -45,7 +38,7 @@
             </Button>
           </li>
           <li class="f-cr mt-2">
-            <Button color="primary" @click.prevent="save">
+            <Button color="primary" @click.prevent="save" async :loading="saving">
               Save
             </Button>
           </li>
@@ -56,10 +49,12 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
+
 export default {
-  asyncData({params, store}) {
-    return store.dispatch('users/find', {query:{$limit: 50000}}).then(users=>{
+
+  asyncData({store}) {
+    return store.dispatch('users/find', {query:{$limit:5000}}).then(users=>{
       console.log(users)
       return { users:  users.data }
     })
@@ -67,37 +62,43 @@ export default {
   data() {
     return {
       name: 'Create Campaign',
+      saving: false,
       data: {
         name: '',
         description: '',
-        dungeon_master: '',
-        campaigne_roles: []
+        map: null,
+        campaignRoles: [{role: 'dm', userId: ''}]
       }
     }
+  },
+  computed: {
+    ...mapState('auth', ['accessToken', 'payload']),
   },
   methods: {
     ...mapActions('campaigns', ['create']),
     addPlayer() {
-      this.data.campaigne_roles.push({
+      this.data.campaignRoles.push({
         userId: '',
         role: 'player',
-        charater_sheet: ''
+        charaterSheet: ''
       })
     },
     removePlayer(e, key) {
       e.preventDefault()
-      this.data.campaigne_roles.splice(key, 1)
+      this.data.campaignRoles.splice(key, 1)
     },
     async save () {
-      const {name, description, dungeon_master, campaigne_roles} = this.data
-      const serviceData = {
-        name,
-        description,
-        campaigne_roles: campaigne_roles.push({userId: dungeon_master, role: 'dm'})
-      }
-      const data = await this.create(serviceData)
-      console.log(data)
-
+      this.$nuxt.$loading.start()
+      this.saving = true
+      const data = this.data
+      data.owner = this.payload.userId
+      await this.create(data)
+      this.$nextTick(()=>{
+        this.saving = false
+        this.$nuxt.$loading.finish()
+        this.$toast.success(`Campaign ${this.data.name} created`)
+        this.$router.push('/campaigns')
+      })
     }
   }
 }

@@ -46,9 +46,9 @@ module.exports = function (app) {
     }
   })
   users.associate = function (models) {
-    console.log('models', models)
     users.belongsToMany(models.campaigns, {
-      through: models.campaign_roles
+      through: 'campaign-roles',
+      as: 'user_campaigns'
     })
   }
 

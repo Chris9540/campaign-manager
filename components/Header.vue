@@ -51,7 +51,7 @@
         </Button>
       </template>
       <template v-else>
-        <Button color="primary" icon class="mr-2" @click.prevent="showProfile">
+        <Button color="primary" icon class="mr-1" @click.prevent="showProfile">
           <fa icon="user" />
         </Button>
         <div class="profile-dropdown elevation-1" :data-show="profile">
@@ -314,7 +314,7 @@ export default {
       position: fixed;
       display: block;
       overflow: hidden;
-      right: $size-2;
+      right: $size-1;
       height: 0px;
       width: 200px;
       top: $header-height;

@@ -18,7 +18,8 @@ module.exports = {
   modules: [
     '@nuxtjs/style-resources',
     'nuxt-fontawesome',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/moment'
   ],
   fontawesome: {
     component: 'fa',
@@ -38,6 +39,7 @@ module.exports = {
     { src: '~/plugins/sweet-modal-vue.js', mode: 'client' },
     { src: '~/plugins/vue-select.js', mode: 'client' },
     { src: '~/plugins/vuelidate.js', mode: 'client' },
-    { src: '~/plugins/vue-toast-notification.js', mode: 'client' }
+    { src: '~/plugins/vue-toast-notification.js', mode: 'client' },
+    { src: '~/plugins/vue-grid-layout.js', ssr: false}
   ]
 }
