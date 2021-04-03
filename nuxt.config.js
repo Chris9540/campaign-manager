@@ -12,6 +12,9 @@ module.exports = {
       }
     }
   },
+  buildModules: [
+    '@nuxtjs/svg'
+  ],
   telemetry: false,
   components: true,
   css: ['~/assets/scss/global.scss'],

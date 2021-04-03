@@ -1,13 +1,12 @@
 'use strict'
 
-const addPlayers = require('../../hooks/campaigns/createRoles')
-const findRelationships = require('../../hooks/campaigns/findRelationships')
-const getRelationships = require('../../hooks/campaigns/getRelationships')
+const { authenticate } = require('@feathersjs/authentication').hooks
+
 module.exports = {
   before: {
-    all: [],
-    find: [findRelationships],
-    get: [getRelationships],
+    all: [authenticate('jwt')],
+    find: [],
+    get: [],
     create: [],
     update: [],
     patch: [],
@@ -18,7 +17,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [addPlayers],
+    create: [],
     update: [],
     patch: [],
     remove: []

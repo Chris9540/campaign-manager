@@ -1,5 +1,5 @@
 <template>
-  <Page name="Edit World" route="/campaings/:id/worlds/:id">
+  <Page name="Edit World" route="/worlds/:worldId">
 
   </Page>
 </template>

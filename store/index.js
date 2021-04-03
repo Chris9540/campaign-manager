@@ -2,21 +2,26 @@ import Vuex from 'vuex'
 import feathersVuex, { initAuth } from 'feathers-vuex'
 import { CookieStorage } from 'cookie-storage'
 import feathersClient from '../feathersClient'
-import serviceList  from './service.register'
+
 let plugins = []
-
-
-
 // Create services for the browser
-const vuexConfig = { idField: 'id', enableEvents: true, serverAlias: 'api', whitelist: ['$regex', '$options'] }
 if (process.client) {
   const browserClient = feathersClient('', new CookieStorage())
-  const { service: browserService, auth: browserAuth } = feathersVuex(browserClient, vuexConfig)
-  serviceList.forEach(s=>{
-    plugins.push(browserService(s.name, s.options))
-  })
-  plugins.push(browserAuth({userService: 'users',state: {publicPages: ['index','signup','login']}}))
+  const { service: browserService, auth: browserAuth } = feathersVuex(browserClient, { idField: 'id', enableEvents: true })
 
+  plugins = [
+    browserService('users', { paginate: true }),
+    browserService('campaigns', { paginate: true}),
+    browserAuth({
+      userService: 'users',
+      state: {
+        publicPages: [
+          'index',
+          'authenticate'
+        ]
+      }
+    })
+  ]
 }
 
 const createStore = () => {
@@ -31,11 +36,15 @@ const createStore = () => {
       setPage(state, page) {
         state.page = page
       },
+      setUserId(state, id) {
+        state.userId = id
+      },
     },
     actions: {
       nuxtServerInit({ commit, dispatch, state }, { req, store }) {
         let origin = req.headers.host.split(':')
         origin = `http://${origin[0]}`
+
         const storage = {
           getItem(key) {
             return store.state.auth ? store.state.auth.accessToken : ''
@@ -49,12 +58,10 @@ const createStore = () => {
         }
         // Create a new client for the server
         const client = feathersClient(origin, storage)
-        const { service, auth } = feathersVuex(client, vuexConfig)
+        const { service, auth } = feathersVuex(client, { idField: 'id', enableEvents: true })
         // Register services for the server
-        for (let i = 0; i < serviceList.length; i++) {
-          const s = serviceList[i]
-          service(s.name, s.options)(store)
-        }
+        service('users', { paginate: true })(store)
+        service('campaigns', { paginate: true })(store)
         auth({
           userService: 'users',
           state: {

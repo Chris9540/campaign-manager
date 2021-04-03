@@ -4,20 +4,18 @@ const Sequelize = require('sequelize')
 const DataTypes = Sequelize.DataTypes
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient')
-  const Kingdoms = sequelizeClient.define('kingdoms', {
+  const Populations = sequelizeClient.define('populations', {
     id: {
       type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true
+    percent: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
     }
+
 
 
   }, {
@@ -29,12 +27,9 @@ module.exports = function (app) {
     }
   })
 
-  Kingdoms.associate = function (models) {
-    Kingdoms.hasMany(models.populations, {
-      foreignKey: 'kingdom_id',
-      as: 'kingdom_populations'
-    })
+  Populations.associate = function (models) {
+    
   }
 
-  return Kingdoms
+  return Populations
 }
