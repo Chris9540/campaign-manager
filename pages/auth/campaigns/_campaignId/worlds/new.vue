@@ -15,17 +15,17 @@
           </li>
           <li>
             <InputControl label="Map SVG">
-              <FileUpload v-model="mapSVG"/>
+              <FileUpload v-model="mapSVG" name="Map.svg" accept=".svg"/>
             </InputControl>
           </li>
           <li>
             <InputControl label="Burgs">
-              <FileUpload json v-model="burgJson"/>
+              <FileUpload text v-model="burgJson" name="Burgs.csv" accept=".csv"/>
             </InputControl>
           </li>
           <li>
             <InputControl label="Markers">
-              <FileUpload json v-model="markerJson"/>
+              <FileUpload text v-model="markerJson" name="Markers.geojson" accept=".geojson"/>
             </InputControl>
           </li>
           <li>
@@ -40,8 +40,10 @@
 <script>
 import {mapActions} from 'vuex'
 import csvToJson from '../../../../../helpers/csvToJson';
-const cstToJson = require('../../../../../helpers/csvToJson')
 export default {
+  asyncData({params}) {
+    return { campaignId : params.campaignId }
+  },
   data() {
     return {
       saving: false,
@@ -53,14 +55,26 @@ export default {
     }
   },
   methods: {
-    ...mapActions('uploads', ['create']),
+    ...mapActions({createUpload: 'uploads/create'}),
+    ...mapActions({createWorld: 'worlds/create'}),
     async save() {
-      
-      const uri = this.mapSVG.uri
-      const csv = csvToJson(this.burgJson.uri)
-      const json = JSON.parse(this.markerJson.uri)
-      // const upload = await this.create({uri : this.mapSVG.uri})
-      console.log(uri, '\n', csv, '\n', json)
+      this.$nuxt.$loading.start()
+      this.saving = true
+      const upload = await this.createUpload({uri : this.mapSVG.uri})
+      const data = {
+        name: this.name,
+        description: this.description,
+        map_svg: upload.id,
+        burg_json: csvToJson(this.burgJson.uri),
+        marker_json: JSON.stringify(JSON.parse(this.markerJson.uri).features),
+        campaign_id: this.campaignId
+      }
+      await this.createWorld(data)
+      this.$nextTick(()=>{
+        this.$nuxt.$loading.finish()
+        this.saving = false
+        this.$router.push(`/auth/campaigns/${this.campaignId}`)
+      })
     }
   },
 };

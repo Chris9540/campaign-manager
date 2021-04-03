@@ -14,15 +14,16 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNUll: false
     },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     index: {
       type: DataTypes.STRING
     },
     link: {
       type: DataTypes.STRING
     }
-
-
-
   }, {
     underscored: true,
     hooks: {

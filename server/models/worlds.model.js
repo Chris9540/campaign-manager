@@ -16,15 +16,23 @@ module.exports = function (app) {
     },
     primary: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
-      default: false
+      allowNull: true,
+      defaultValue: false
     },
     description: {
       type: DataTypes.STRING
     },
-    map_link: {
+    map_svg: {
       type: DataTypes.STRING,
       allowNul:true
+    },
+    burg_json: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    marker_json: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     underscored: true,

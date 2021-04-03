@@ -30,7 +30,7 @@
         required: false,
         default: 'file.ext'
       },
-      json: {
+      text: {
         type: Boolean,
         required: false,
         default:false
@@ -46,7 +46,7 @@
     },
     methods: {
       async read(event) {
-        this.data = (!this.json) ? await asyncReadAsDataURL(event.target.files[0]) : await asyncReadDataAsText(event.target.files[0])
+        this.data = (!this.text) ? await asyncReadAsDataURL(event.target.files[0]) : await asyncReadDataAsText(event.target.files[0])
       }
     },
   }
@@ -62,7 +62,7 @@
   background-color: $card-body-bg;
   transition: $transition;
   flex: 1;
-  max-width: 400px;
+  max-width: 600px;
   &:hover {
       background-color: darken($card-body-bg, 10%);
   }

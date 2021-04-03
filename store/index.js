@@ -11,12 +11,14 @@ if (process.client) {
 
   plugins = [
     browserService('users', { paginate: true }),
+    browserService('burgs', {paginate: true}),
     browserService('campaigns', { paginate: true}),
     browserService('campaign-roles', { paginate: false}),
     browserService('kingdoms', {paginate: true}),
     browserService('populations', {paginate: false}),
     browserService('races', {paginate: false}),
     browserService('uploads', {paginate: false}),
+    browserService('worlds', {paginate: true}),
     browserAuth({
       userService: 'users',
       state: {
@@ -66,12 +68,14 @@ const createStore = () => {
         const { service, auth } = feathersVuex(client, { idField: 'id', enableEvents: true })
         // Register services for the server
         service('users', { paginate: true })(store)
+        service('burgs', {paginate: true})(store)
         service('campaigns', { paginate: true })(store)
         service('campaign-roles', {paginate: false})(store)
         service('kingdoms', {paginate: true})(store)
         service('populations', {paginate: false})(store)
         service('races', {paginate: false})(store)
         service('uploads', {paginate: false})(store)
+        service('worlds', {paginate: true})(store)
         auth({
           userService: 'users',
           state: {

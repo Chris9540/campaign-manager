@@ -2,7 +2,7 @@ module.exports = {
   router: { middleware: ['auth'] },
   dev: process.env.NODE_ENV !== 'production',
   head: {
-    title: 'My Feathers + Nuxt App'
+    title: 'Campaign Manager'
   },
   build: {
     extend(config, { isClient }) {
@@ -43,6 +43,7 @@ module.exports = {
     { src: '~/plugins/vue-select.js', mode: 'client' },
     { src: '~/plugins/vuelidate.js', mode: 'client' },
     { src: '~/plugins/vue-toast-notification.js', mode: 'client' },
-    { src: '~/plugins/vue-grid-layout.js', ssr: false}
+    { src: '~/plugins/vue-grid-layout.js', ssr: false},
+    { src: '~/plugins/v-jsoneditor.js', mode: 'client' },
   ]
 }

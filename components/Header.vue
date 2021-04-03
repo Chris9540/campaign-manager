@@ -117,10 +117,11 @@ export default {
     menu() {
       return {
         left: [
-          {text: 'Campaigns', link: '/auth/campaigns', icon: 'route'}
+          {text: 'Campaigns', link: '/auth/campaigns', icon: 'route'},
+          {text: 'Seed Data', link: '/auth/seed', icon: 'database'}
         ],
         right: [
-          {text: 'Maps', link: `/auth/users/${this.payload.userId}`, icon: 'map'}
+          {text: 'Races', link: `/auth/races`, icon: 'users'}
         ]
       }
     }
@@ -153,7 +154,7 @@ export default {
     },
     goToProfile () {
       this.close()
-      this.$router.push(`/users/${this.payload.userId}`)
+      this.$router.push(`/auth/users/${this.payload.userId}`)
     }
   },
 

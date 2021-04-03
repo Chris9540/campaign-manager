@@ -1,21 +1,40 @@
 <template>
   <div>
-    <div class="p-1 f-c">
-        <select v-model="zoom">
-          <option v-for="i in 10" :key="i" :value="i">
-            {{ i }}x
-          </option>
-        </select>
-        <input type="range" min="0" :max="width" step="1" v-model="viewBox.x"  style="width:300px"/>
-        <input type="range" min="0" :max="height" step="1" v-model="viewBox.y" style="width:300px"/>
-        <Button color="primary" @click.prevent="png">to png</Button>
-    </div>
-    <div ref="map" class="map-box" v-html="require('~/assets/uploads/Vala2.svg?raw')"/>
+    <ul>
+      <li>
+        <InputControl label="Zoom">
+          <select name="zoom" v-model="zoom" >
+            <option v-for="i in 10" :key="i" :value="i">
+              {{ i }}x
+            </option>
+          </select>
+        </InputControl>
+      </li>
+      <li>
+        <InputControl label="Horizontal Position">
+          <input type="range" min="0" step="1" :max="width" name="x" v-model="viewBox.x" style="max-width:1000px"/>
+        </InputControl>
+      </li>
+      <li>
+        <InputControl label="Verticle Position">
+          <input type="range" min="0" step="1" :max="height" name="y" v-model="viewBox.y" style="max-width:1000px"/>
+        </InputControl>
+      </li>
+      <li>
+        <div ref="map" class="map-box" v-html="require(`~/assets/uploads/${fileName}?raw`)"/>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
   export default {
+    props: {
+      fileName: {
+        type: String,
+        required: true
+      },
+    },
     data() {
       return {
         width: 0,
@@ -39,6 +58,7 @@
         deep: true,
         handler(value) {
           this.svg.setAttribute('viewBox', `${value.x} ${value.y} ${value.w} ${value.h}`)
+          this.$emit('input', `${value.x} ${value.y} ${value.w} ${value.h}`)
         }
       }
     },
@@ -58,10 +78,10 @@
   }
 </script>
 
+
 <style lang="scss" scoped>
 .map-box {
   width: 1000px;
-  height: 600px;
   margin: auto;
   overflow: hidden;
 }

@@ -19,7 +19,7 @@
         </Layout>
       </template>
     </Card>
-    <WorldsManager :campaignId="campaign.id"/>
+    <ViewWorlds :campaignId="campaign.id"/>
   </Page>
 </template>
 
@@ -48,9 +48,6 @@
         const {x,y,w,h} = this.layout[index]
         return {x,y,w,h}
       }
-    },
-    mounted () {
-      console.log(this.campaign);
     },
   }
 </script>

@@ -46,12 +46,15 @@
         <label>
           size
         </label>
-          <select v-model="limit">
+          <select v-model="limit" class="ml-1">
             <option value="20">20</option>
             <option value="50">50</option>
             <option value="100">100</option>
             <option value="1000">1000</option>
           </select>
+          <div class="ml-2">
+            {{ skip+1 }} to {{ Math.min(skip+limit,total) }} of {{ total }}
+          </div>
       </div>
       <div class="data-table-pagination-options f-cr">
         <Button v-if="skip > 0" color="default" @click.prevent="current--">
@@ -290,7 +293,10 @@
     flex-direction: row;
     justify-content: center;
     .data-table-fetch-limit {
-      flex: 1
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
     }
     .data-table-pagination-options {
       flex: 3;

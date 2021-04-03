@@ -89,7 +89,7 @@ export default {
   }
   .input, .select, .textarea {
     flex: 1;
-    max-width: 400px;
+    max-width: 600px;
   }
   .textarea {
     min-height: 40px;

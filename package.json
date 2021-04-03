@@ -69,6 +69,7 @@
     "serve-favicon": "^2.5.0",
     "sqlite3": "^5.0.2",
     "sweet-modal-vue": "^2.0.0",
+    "v-jsoneditor": "^1.4.2",
     "vue-grid-layout": "^2.3.12",
     "vue-js-modal": "^2.0.0-rc.6",
     "vue-no-ssr": "^1.1.1",

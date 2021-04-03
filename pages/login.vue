@@ -52,7 +52,6 @@ export default {
       await this.authenticate({ ...credentials, strategy: 'local' })
       const {data} = await this.find({query:{id: this.payload.userId}})
       const {id, name, token, link} = data[0]
-      console.log(data[0])
       if(!name || !token || !link) {
         this.$router.push(`/users/${id}`)
       }

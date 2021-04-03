@@ -30,9 +30,9 @@ module.exports = function (app) {
   })
 
   Kingdoms.associate = function (models) {
-    Kingdoms.hasMany(models.populations, {
+    Kingdoms.hasMany(models.burgs, {
       foreignKey: 'kingdom_id',
-      as: 'kingdom_populations'
+      as: 'kingdom_burgs'
     })
   }
 

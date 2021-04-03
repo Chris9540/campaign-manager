@@ -55,7 +55,6 @@ export default {
   name: 'new-campaign',
   asyncData({store}) {
     return store.dispatch('users/find', {query:{$limit:5000}}).then(users=>{
-      console.log(users)
       return { users:  users.data }
     })
   },
