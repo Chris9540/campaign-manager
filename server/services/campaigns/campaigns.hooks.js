@@ -1,13 +1,12 @@
 'use strict'
 
 const addPlayers = require('../../hooks/campaigns/createRoles')
-const findRelationships = require('../../hooks/campaigns/findRelationships')
-const getRelationships = require('../../hooks/campaigns/getRelationships')
+const relationships = require('../../hooks/campaigns/relationships')
 module.exports = {
   before: {
     all: [],
-    find: [findRelationships],
-    get: [getRelationships],
+    find: [relationships],
+    get: [relationships],
     create: [],
     update: [],
     patch: [],

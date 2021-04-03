@@ -12,6 +12,11 @@ if (process.client) {
   plugins = [
     browserService('users', { paginate: true }),
     browserService('campaigns', { paginate: true}),
+    browserService('campaign-roles', { paginate: false}),
+    browserService('kingdoms', {paginate: true}),
+    browserService('populations', {paginate: false}),
+    browserService('races', {paginate: false}),
+    browserService('uploads', {paginate: false}),
     browserAuth({
       userService: 'users',
       state: {
@@ -62,6 +67,11 @@ const createStore = () => {
         // Register services for the server
         service('users', { paginate: true })(store)
         service('campaigns', { paginate: true })(store)
+        service('campaign-roles', {paginate: false})(store)
+        service('kingdoms', {paginate: true})(store)
+        service('populations', {paginate: false})(store)
+        service('races', {paginate: false})(store)
+        service('uploads', {paginate: false})(store)
         auth({
           userService: 'users',
           state: {

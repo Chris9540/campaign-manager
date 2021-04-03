@@ -11,9 +11,9 @@ module.exports = function (app) {
   app.configure(users);
   app.configure(campaigns);
   app.configure(campaignRoles);
-  // app.configure(kingdoms);
-  // app.configure(populations);
-  // app.configure(races);
-  // app.configure(uploads);
-  // app.configure(worlds);
+  app.configure(kingdoms);
+  app.configure(populations);
+  app.configure(races);
+  app.configure(uploads);
+  app.configure(worlds);
 };

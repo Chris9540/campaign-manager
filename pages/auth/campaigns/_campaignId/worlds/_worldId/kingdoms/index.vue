@@ -1,12 +1,12 @@
 <template>
-  <Page name="Edit World" route="/worlds/:worldId">
+  <div>
 
-  </Page>
+  </div>
 </template>
 
 <script>
   export default {
-    
+    name: 'kingdoms'
   }
 </script>
 

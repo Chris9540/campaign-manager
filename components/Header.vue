@@ -117,10 +117,10 @@ export default {
     menu() {
       return {
         left: [
-          {text: 'Campaigns', link: '/campaigns', icon: 'route'}
+          {text: 'Campaigns', link: '/auth/campaigns', icon: 'route'}
         ],
         right: [
-          {text: 'Maps', link: `/users/${this.payload.userId}`, icon: 'map'}
+          {text: 'Maps', link: `/auth/users/${this.payload.userId}`, icon: 'map'}
         ]
       }
     }

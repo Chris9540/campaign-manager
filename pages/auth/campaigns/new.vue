@@ -1,5 +1,5 @@
 <template>
-  <Page :name="name" route="/campaigns/new">
+  <Page :name="name" route="/auth/campaigns/new">
     <Card :name="name" width="800px">
       <template #body>
         <InputControl label="Name">
@@ -52,7 +52,7 @@
 import {mapActions, mapState} from 'vuex'
 
 export default {
-
+  name: 'new-campaign',
   asyncData({store}) {
     return store.dispatch('users/find', {query:{$limit:5000}}).then(users=>{
       console.log(users)
@@ -97,7 +97,7 @@ export default {
         this.saving = false
         this.$nuxt.$loading.finish()
         this.$toast.success(`Campaign ${this.data.name} created`)
-        this.$router.push('/campaigns')
+        this.$router.push('/auth/campaigns')
       })
     }
   }

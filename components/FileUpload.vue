@@ -6,6 +6,7 @@
 
 <script>
   const asyncReadAsDataURL = require('../helpers/asyncReadAsDataURL')
+  const asyncReadDataAsText = require('../helpers/asyncReadDataAsText');
   export default {
     data() {
       return {
@@ -28,6 +29,11 @@
         type: String,
         required: false,
         default: 'file.ext'
+      },
+      json: {
+        type: Boolean,
+        required: false,
+        default:false
       }
     },
     watch: {
@@ -40,7 +46,7 @@
     },
     methods: {
       async read(event) {
-        this.data = await asyncReadAsDataURL(event.target.files[0])
+        this.data = (!this.json) ? await asyncReadAsDataURL(event.target.files[0]) : await asyncReadDataAsText(event.target.files[0])
       }
     },
   }

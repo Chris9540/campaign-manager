@@ -1,5 +1,5 @@
 <template>
-  <Page name="Edit Campaign" route="/campaign/:campaignId">
+  <Page name="Edit Campaign" route="/auth/campaigns/:campaignId">
     <Card name="Edit Campaign">
       <template #body>
         <Layout rowHeight="42px" :layout="layout" :margin="[10, 8]">
@@ -19,12 +19,13 @@
         </Layout>
       </template>
     </Card>
-    <!-- <WorldsManager :campaignId="campaign.id"/> -->
+    <WorldsManager :campaignId="campaign.id"/>
   </Page>
 </template>
 
 <script>
   export default {
+    name: 'edit-campaign',
     asyncData({params, store}) {
       return store.dispatch('campaigns/get', params.campaignId).then((campaign)=>{
         return { campaign }

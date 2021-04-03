@@ -3,7 +3,7 @@
     <template #body>
       <ul>
         <li class="p-1 f-cr">
-          <Button color="primary" @click.prevent="$router.push(`/campaigns/${campaignId}/worlds/new`)">Add New World</Button>
+          <Button color="primary" @click.prevent="$router.push(`/auth/campaigns/${campaignId}/worlds/new`)">Add New World</Button>
         </li>
       </ul>
     </template>

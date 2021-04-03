@@ -10,7 +10,7 @@
         <input type="range" min="0" :max="height" step="1" v-model="viewBox.y" style="width:300px"/>
         <Button color="primary" @click.prevent="png">to png</Button>
     </div>
-    <div ref="map" class="map-box" v-html="require('../assets/uploads/Vala2.svg?raw')"/>
+    <div ref="map" class="map-box" v-html="require('~/assets/uploads/Vala2.svg?raw')"/>
   </div>
 </template>
 
