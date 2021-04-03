@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 const DataTypes = Sequelize.DataTypes
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient')
-  const Worlds = sequelizeClient.define('worlds', {
+  const Races = sequelizeClient.define('races', {
     id: {
       type: DataTypes.BIGINT,
       autoIncrement: true,
@@ -12,20 +12,17 @@ module.exports = function (app) {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNUll: false
     },
-    primary: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      default: false
-    },
-    description: {
+    index: {
       type: DataTypes.STRING
     },
-    map_link: {
-      type: DataTypes.STRING,
-      allowNul:true
+    link: {
+      type: DataTypes.STRING
     }
+
+
+
   }, {
     underscored: true,
     hooks: {
@@ -35,12 +32,12 @@ module.exports = function (app) {
     }
   })
 
-  Worlds.associate = function (models) {
-    Worlds.hasMany(models.kingdoms, {
-      foreignKey: 'world_id',
-      as: 'world_kingdoms'
+  Races.associate = function (models) {
+    Races.hasMany(models.populations, {
+      foreignKey: 'race_id',
+      as: 'race_populations'
     })
   }
 
-  return Worlds
+  return Races
 }

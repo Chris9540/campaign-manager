@@ -1,5 +1,5 @@
 <template>
-  <Page name="Monsters" route="/monsters">
+  <Page name="Monsters" route="/auth/monsters">
     <ul style="width: 800px">
       <li v-for="monster in monsters" :key="monster.index" class="mt-2 mb-2">
         <div class="monster-display">

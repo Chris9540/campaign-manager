@@ -16,17 +16,7 @@ export default (origin, storage) => {
 
   const feathersClient = feathers()
     .configure(socketio(socket))
-    .configure(auth({ storage }))
-    .hooks({
-      before: {
-        all: [
-          iff(
-            context => ['create', 'update', 'patch'].includes(context.method),
-            discard('__id', '__isTemp')
-          )
-        ]
-      }
-    });
+    .configure(auth({ storage }));
 
   return feathersClient
 }

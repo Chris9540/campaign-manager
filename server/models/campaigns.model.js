@@ -37,6 +37,10 @@ module.exports = function (app) {
       foreignKey: 'owner',
       as: 'campaign_owner'
     })
+    // campaigns.hasMany(models.worlds, {
+    //   foreignKey: 'campaign_id',
+    //   as: 'campaign_worlds'
+    // })
   }
 
   return campaigns

@@ -1,7 +1,7 @@
 <template>
 <div>
   <div style="width:100%" class="f-c p-1">
-    <InputControl label="Size">
+    <InputControl label="Size" v-if="!build">
       <select name="size" v-model="cols" >
         <option v-for="(size, key) in colSizes" :key="key" :value="size">{{ size }}</option>
       </select>
@@ -18,7 +18,7 @@
       :margin="[0, 0]"
       :use-css-transforms="true"
       :style="style"
-      class="fixed-map elevation-1"
+      class="fixed-map elevation-1 walls"
     >
       <GridItem
         v-for="item in layout"
@@ -66,11 +66,17 @@ var rooms = [
 export default {
   data() {
     return {
-      layout: rooms,
+      build: true,
+      layout: [{ x:2, y:2, w:10, h:10, i:"0" }],
       cols: 20,
       colSizes: [20, 30, 32, 40, 50, 60, 64, 70, 80, 90, 100, 128],
-      size: 16
+      size: 32
     };
+  },
+  mounted () {
+    this.$nextTick(()=>{
+      this.build = false
+    });
   },
   computed: {
     style() {
@@ -91,10 +97,17 @@ export default {
     margin-left: auto;
     margin-right: auto;
     background-color: $grey-1;
+      border-image-slice:32 32 32 32;
+      border-image-width:32px 32px 32px 32px;
+      border-image-outset:0px 0px 0px 0px;
+      border-image-repeat:repeat repeat;
+      border-image-source: url('/img/tiles/light/walls.png');
+      border-width: 32px;
+      border-style: solid;
+      box-sizing: content-box;
     .room {
       color: black;
       background: white;
-      box-shadow: 0px 0px 6px 2px white;
     }
   }
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <Page name="Campain Worlds" route="/campaign/:id/worlds">
+  <div>
 
-  </Page>
+  </div>
 </template>
 
 <script>
   export default {
-    
+    name: 'edit-kingdom',
   }
 </script>
 

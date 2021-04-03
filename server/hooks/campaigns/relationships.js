@@ -16,6 +16,11 @@ module.exports = async function campaignsRelationships (context) {
         model: sequelize.models.users,
         attributes: ['name', 'id']
       },
+      {
+        as: 'campaign_players',
+        model: sequelize.models.users,
+        through: {attributes: ['role']}
+      },
     ]
   };
 

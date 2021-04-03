@@ -1,11 +1,12 @@
 <template>
-  <Page name="All worlds" route="/worlds">
-    
-  </Page>
+  <div>
+
+  </div>
 </template>
 
 <script>
   export default {
+    name: 'new-kingdom'
   }
 </script>
 
